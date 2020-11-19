@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>datetime_konwerter_czasu</artifactId>
+    <artifactId>datetime_konwerter_czasu_dodatkowe</artifactId>
     <version>1.0</version>
 
     <repositories>
