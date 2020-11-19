@@ -13,7 +13,6 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-@Timeout(5)
 public class ExampleTest {
 
     private final PrintStream originalOut = System.out;
@@ -88,6 +87,101 @@ public class ExampleTest {
         assertThat(outContent.toString()).contains("Sydney: 2015-12-06 08:00:00");
     }
 
+    @DisplayName("t")
+    @Test
+    void shouldWorkForNow() {
+        // given
+        provideInput("t");
+
+        // when
+        Main.main(new String[]{});
+
+        // then
+        ZonedDateTime now = ZonedDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        assertThat(outContent.toString()).contains("Czas lokalny: " + formatter.format(now));
+    }
+
+    @DisplayName("t+2d")
+    @Test
+    void shouldWorkForNowPlus2Days() {
+        // given
+        provideInput("t+2d");
+
+        // when
+        Main.main(new String[]{});
+
+        // then
+        ZonedDateTime dateTime = ZonedDateTime.now().plusDays(2);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        assertThat(outContent.toString()).contains("Czas lokalny: " + formatter.format(dateTime));
+    }
+
+    @DisplayName("t-2d")
+    @Test
+    void shouldWorkForNowMinus2Days() {
+        // given
+        provideInput("t-2d");
+
+        // when
+        Main.main(new String[]{});
+
+        // then
+        ZonedDateTime dateTime = ZonedDateTime.now().minusDays(2);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        assertThat(outContent.toString()).contains("Czas lokalny: " + formatter.format(dateTime));
+    }
+
+    @DisplayName("t+3h")
+    @Test
+    void shouldWorkForNowMinus3Hours() {
+        // given
+        provideInput("t+3h");
+
+        // when
+        Main.main(new String[]{});
+
+        // then
+        ZonedDateTime dateTime = ZonedDateTime.now().plusHours(3);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        assertThat(outContent.toString()).contains("Czas lokalny: " + formatter.format(dateTime));
+    }
+
+    @DisplayName("t+1y-20m")
+    @Test
+    void shouldWorkForNowPlus1YearMinus20Minutes() {
+        // given
+        provideInput("t+1y-20m");
+
+        // when
+        Main.main(new String[]{});
+
+        // then
+        ZonedDateTime dateTime = ZonedDateTime.now().plusYears(1).minusMinutes(20);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        assertThat(outContent.toString()).contains("Czas lokalny: " + formatter.format(dateTime));
+    }
+
+    @DisplayName("t+1y-4M+2d+14h-20m+59s")
+    @Test
+    void shouldWorkForNowWithEveryChange() {
+        // given
+        provideInput("t+1y-4M+2d+14h-20m+59s");
+
+        // when
+        Main.main(new String[]{});
+
+        // then
+        ZonedDateTime dateTime = ZonedDateTime.now()
+                .plusYears(1)
+                .minusMonths(4)
+                .plusDays(2)
+                .plusHours(14)
+                .minusMinutes(20)
+                .plusSeconds(59);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        assertThat(outContent.toString()).contains("Czas lokalny: " + formatter.format(dateTime));
+    }
 
     @BeforeEach
     void init() {
