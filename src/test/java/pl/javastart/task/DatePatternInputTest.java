@@ -1,19 +1,21 @@
 package pl.javastart.task;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-import java.io.*;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
+import java.util.TimeZone;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-public class ExampleTest {
+public class DatePatternInputTest {
 
     private final PrintStream originalOut = System.out;
     private final InputStream originalIn = System.in;
@@ -186,6 +188,7 @@ public class ExampleTest {
     @BeforeEach
     void init() {
         System.setOut(new PrintStream(outContent));
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/Warsaw"));
     }
 
     @AfterEach
