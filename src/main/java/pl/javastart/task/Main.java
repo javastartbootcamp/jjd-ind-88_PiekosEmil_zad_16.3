@@ -13,19 +13,19 @@ public class Main {
     }
 
     public void run(Scanner scanner) {
-        System.out.println("Podaj datę lub modyfikuj aktualną datę:");
-        System.out.println("Modyfikator w formacie t+/-n, gdzie n to dowolna liczba,");
-        System.out.println("y - dla lat,");
-        System.out.println("M - dla miesięcy,");
-        System.out.println("d - dla dni,");
-        System.out.println("h - dla godzin,");
-        System.out.println("m - dla minut,");
-        System.out.println("s - dla sekund.");
+//        System.out.println("Podaj datę lub modyfikuj aktualną datę:");
+//        System.out.println("Modyfikator w formacie t+/-n, gdzie n to dowolna liczba,");
+//        System.out.println("y - dla lat,");
+//        System.out.println("M - dla miesięcy,");
+//        System.out.println("d - dla dni,");
+//        System.out.println("h - dla godzin,");
+//        System.out.println("m - dla minut,");
+//        System.out.println("s - dla sekund.");
         String dateInput = scanner.nextLine();
 
         if (dateInput.startsWith("t")) {
             LocalDateTime modifiedDateTime = DateTimeUtils.modifyInputDateTime(dateInput);
-            System.out.println(modifiedDateTime.format(formatter));
+            System.out.println("Czas lokalny: " + modifiedDateTime.format(formatter));
             if (dateInput.equals("t")) {
                 LocalDateTime now = LocalDateTime.now();
                 System.out.println(now.format(formatter));
